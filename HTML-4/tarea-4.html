@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operaciones Matemáticas</title>
+    <style>
+        /* Estilos generales para el cuerpo de la página */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna */
+            background-color: #f0f4f8; /* Fondo claro */
+            color: #333; /* Color de texto oscuro */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center; /* Centra el contenido horizontalmente */
+            align-items: center; /* Centra el contenido verticalmente */
+            height: 100vh; /* Altura completa de la ventana */
+        }
+
+        /* Contenedor principal para el formulario y los resultados */
+        .container {
+            background-color: #ffffff; /* Fondo blanco para destacar */
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            border-radius: 8px; /* Bordes redondeados */
+            width: 350px;
+            text-align: center; /* Texto centrado */
+        }
+
+        /* Estilo del título principal */
+        h1 {
+            color: #007bff; /* Color azul brillante */
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        /* Etiquetas para los campos de entrada */
+        label {
+            display: block;
+            font-size: 14px;
+            color: #555; /* Color gris para las etiquetas */
+            margin-bottom: 8px;
+            text-align: left; /* Alineación a la izquierda */
+        }
+
+        /* Estilos para los campos de entrada de números */
+        input[type="number"] {
+            width: 100%; /* Ocupa todo el ancho del contenedor */
+            padding: 10px; /* Espaciado interno */
+            margin-bottom: 20px;
+            border: 1px solid #ddd; /* Borde gris claro */
+            border-radius: 5px; /* Bordes redondeados */
+            box-sizing: border-box; /* Asegura que el padding esté dentro del tamaño total */
+            font-size: 16px;
+        }
+
+        /* Estilos para el botón de enviar */
+        button {
+            width: 100%; /* Botón ocupa todo el ancho */
+            padding: 12px; /* Espaciado interno */
+            background-color: #007bff; /* Fondo azul */
+            color: white; /* Texto blanco */
+            border: none; /* Sin bordes */
+            border-radius: 5px; /* Bordes redondeados */
+            font-size: 16px;
+            cursor: pointer; /* Cambia el cursor a puntero cuando se pasa sobre el botón */
+            transition: background-color 0.3s ease; /* Suaviza el cambio de color de fondo */
+        }
+
+        /* Efecto hover (al pasar el ratón por encima) del botón */
+        button:hover {
+            background-color: #0056b3; /* Cambia a un azul más oscuro */
+        }
+
+        /* Contenedor de los resultados */
+        .result {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        /* Estilo de cada párrafo de resultado */
+        .result p {
+            background-color: #f1f1f1; /* Fondo gris claro */
+            padding: 10px; /* Espaciado interno */
+            border-radius: 5px; /* Bordes redondeados */
+            margin-bottom: 10px; /* Separación entre los resultados */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra suave */
+        }
+
+        /* Estilo para mensajes de error */
+        .error {
+            color: red; /* Texto rojo para errores */
+        }
+    </style>
+</head>
+<body>
+    <!-- Contenedor principal del formulario -->
+    <div class="container">
+        <h1>Operaciones Matemáticas</h1>
+        <!-- Formulario de entrada de datos -->
+        <form id="mathForm">
+            <!-- Etiqueta e input para el primer número -->
+            <label for="numero1">Ingrese el primer número:</label>
+            <input type="number" id="numero1" placeholder="Ej: 10" required>
+
+            <!-- Etiqueta e input para el segundo número -->
+            <label for="numero2">Ingrese el segundo número:</label>
+            <input type="number" id="numero2" placeholder="Ej: 5" required>
+
+            <!-- Botón para ejecutar las operaciones -->
+            <button type="button" onclick="realizarOperaciones()">Calcular</button>
+        </form>
+
+        <!-- Contenedor donde se mostrarán los resultados -->
+        <div id="resultados" class="result"></div>
+    </div>
+
+    <script>
+        /* Función para realizar las operaciones matemáticas */
+        function realizarOperaciones() {
+            const numero1 = parseFloat(document.getElementById('numero1').value); // Obtiene y convierte el primer número
+            const numero2 = parseFloat(document.getElementById('numero2').value); // Obtiene y convierte el segundo número
+            let resultados = ''; // Variable para almacenar los resultados
+
+            // Verifica si ambos números son válidos
+            if (!isNaN(numero1) && !isNaN(numero2)) {
+                // Bucle que realiza las 5 iteraciones solicitadas
+                for (let i = 1; i <= 5; i++) {
+                    switch (i) {
+                        case 1:
+                            // Iteración 1: Suma
+                            resultados += `<p>Iteración ${i}: Suma (${numero1} + ${numero2}) = ${numero1 + numero2}</p>`;
+                            break;
+                        case 2:
+                            // Iteración 2: Resta
+                            resultados += `<p>Iteración ${i}: Resta (${numero1} - ${numero2}) = ${numero1 - numero2}</p>`;
+                            break;
+                        case 3:
+                            // Iteración 3: Multiplicación
+                            resultados += `<p>Iteración ${i}: Multiplicación (${numero1} * ${numero2}) = ${numero1 * numero2}</p>`;
+                            break;
+                        case 4:
+                            // Iteración 4: División, verificando que el segundo número no sea 0
+                            if (numero2 !== 0) {
+                                resultados += `<p>Iteración ${i}: División (${numero1} / ${numero2}) = ${numero1 / numero2}</p>`;
+                            } else {
+                                resultados += `<p class="error">Iteración ${i}: División por 0 no es posible.</p>`;
+                            }
+                            break;
+                        case 5:
+                            // Iteración 5: Módulo, verificando que el segundo número no sea 0
+                            if (numero2 !== 0) {
+                                resultados += `<p>Iteración ${i}: Módulo (${numero1} % ${numero2}) = ${numero1 % numero2}</p>`;
+                            } else {
+                                resultados += `<p class="error">Iteración ${i}: Módulo por 0 no es posible.</p>`;
+                            }
+                            break;
+                    }
+                }
+                // Muestra los resultados en el contenedor
+                document.getElementById('resultados').innerHTML = resultados;
+            } else {
+                // Si los números no son válidos, muestra un mensaje de error
+                document.getElementById('resultados').innerHTML = '<p class="error">Por favor, ingrese números válidos.</p>';
+            }
+        }
+    </script>
+</body>
+</html>
